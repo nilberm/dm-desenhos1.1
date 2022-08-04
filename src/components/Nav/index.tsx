@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "./style.module.scss";
 import { IoMenuOutline } from "react-icons/io5";
 
-export const Home = () => {
+const Nav = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
   const [screenWith, setScreenWidth] = useState(window.innerWidth);
 
@@ -55,3 +55,5 @@ export const Home = () => {
     </header>
   );
 };
+
+export default Nav;

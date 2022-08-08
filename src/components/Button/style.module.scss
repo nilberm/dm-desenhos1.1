@@ -1,0 +1,17 @@
+.button {
+  width: 6rem;
+  border: none;
+
+  font: 700 1rem "Roboto", sans-serif;
+  background: var(--lightRedOrange);
+  border-radius: 10px;
+  padding: 0.2rem 0.5rem;
+  box-shadow: 0 4px 4px rgb(0 0 0 / 25%);
+
+  transform: scale(0.99);
+  transition: 0.3s;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+}

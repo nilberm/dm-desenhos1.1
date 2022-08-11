@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import styles from "./style.module.scss";
 import { IoMenuOutline } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
 const Nav = () => {
+  const navigate = useNavigate();
+
   const [toggleMenu, setToggleMenu] = useState(false);
   const [screenWith, setScreenWidth] = useState(window.innerWidth);
 
@@ -24,7 +27,12 @@ const Nav = () => {
 
   return (
     <header className={styles.headerContainer}>
-      <div className={styles.logo}>
+      <div
+        className={styles.logo}
+        onClick={() => {
+          navigate("/");
+        }}
+      >
         <h1>Logo</h1>
       </div>
       <IoMenuOutline onClick={toggleNav} className={styles.btnMobile} />

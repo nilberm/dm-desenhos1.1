@@ -1,0 +1,40 @@
+{
+  "businessRule": [
+    {
+      "id": 1,
+      "name": "DM Style",
+      "description": "Desenho DM Style, bla bla bla Desenho Realista, bla bla bla\n    Desenho Realista, bla bla bla Desenho Realista, bla bla bla",
+      "image": "https://i.imgur.com/OwAF2jE.png",
+      "price": {
+        "busto": 70,
+        "meioCorpo": 85,
+        "corpoInteiro": 100
+      },
+      "petPrice": 40
+    },
+    {
+      "id": 2,
+      "name": "Realista",
+      "description": "Desenho Realista, bla bla bla Desenho Realista, bla bla bla\n    Desenho Realista, bla bla bla Desenho Realista, bla bla bla",
+      "image": "https://i.imgur.com/96au2JP.png",
+      "price": {
+        "busto": 90,
+        "meioCorpo": 120,
+        "corpoInteiro": 150
+      },
+      "petPrice": 50
+    },
+    {
+      "id": 3,
+      "name": "Kawaii",
+      "description": "Desenho Kawaii, bla bla bla Desenho Realista, bla bla bla\n    Desenho Realista, bla bla bla Desenho Realista, bla bla bla",
+      "image": "https://i.imgur.com/Zhc555W.png",
+      "price": {
+        "busto": 45,
+        "meioCorpo": 70,
+        "corpoInteiro": 75
+      },
+      "petPrice": 25
+    }
+  ]
+}

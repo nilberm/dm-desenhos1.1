@@ -4,7 +4,7 @@ import { BsFacebook, BsInstagram, BsWhatsapp, BsYoutube } from "react-icons/bs";
 
 const Footer = () => {
   return (
-    <footer className={style.footer}>
+    <footer id="footer" className={style.footer}>
       <div className={style.infoFooter}>
         <div className={style.logo}>Logo</div>
 

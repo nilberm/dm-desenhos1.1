@@ -95,6 +95,8 @@ export const Container = styled.main`
 
           img {
             box-shadow: 0 4px 4px rgb(0 0 0 / 25%);
+
+            border-radius: 10px;
           }
         }
       }

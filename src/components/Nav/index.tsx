@@ -40,21 +40,21 @@ const Nav = () => {
         {(toggleMenu || screenWith > 980) && (
           <>
             <ul className={styles.navList}>
-              <li>
-                {/* eslint-disable-next-line */}
-                <a href="#">Home</a>
+              <li onClick={toggleNav}>
+                <a href="/">Home</a>
               </li>
-              <li>
-                {/* eslint-disable-next-line */}
-                <a href="#">Encomenda</a>
+              {window.location.pathname === "/" ? (
+                <li onClick={toggleNav}>
+                  <a href="#services">Encomenda</a>
+                </li>
+              ) : (
+                ""
+              )}
+              <li onClick={toggleNav}>
+                <a href="#footer">Contato</a>
               </li>
-              <li>
-                {/* eslint-disable-next-line */}
-                <a href="#">Contato</a>
-              </li>
-              <li>
-                {/* eslint-disable-next-line */}
-                <a href="#">Sobre</a>
+              <li onClick={toggleNav}>
+                <a href="#footer">Sobre</a>
               </li>
             </ul>
           </>

@@ -19,8 +19,8 @@ const Home = () => {
   const navigate = useNavigate();
 
   const dmStyle = 1;
-  const kawai = 2;
-  const realistic = 3;
+  const realistic = 2;
+  const kawai = 3;
 
   return (
     <Container>
@@ -65,30 +65,33 @@ const Home = () => {
               className="card"
               onClick={() => {
                 navigate(`encomendas/${dmStyle}`);
+                window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
               }}
             >
               <img src={dmStyleImg} alt="Desenho no estilo Realista" />
-              <ButtonStyle text="DM-Style"></ButtonStyle>
-            </div>
-
-            <div
-              className="card"
-              onClick={() => {
-                navigate(`encomendas/${kawai}`);
-              }}
-            >
-              <img src={kawaiImg} alt="Desenho no estilo DM Style" />
-              <ButtonStyle text="Kawai"></ButtonStyle>
+              <ButtonStyle background="#fadbcf" text="DM-Style"></ButtonStyle>
             </div>
 
             <div
               className="card"
               onClick={() => {
                 navigate(`encomendas/${realistic}`);
+                window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
               }}
             >
               <img src={realisticImg} alt="Desenho no estilo Kawai" />
-              <ButtonStyle text="Realistic"></ButtonStyle>
+              <ButtonStyle background="#fadbcf" text="Realistic"></ButtonStyle>
+            </div>
+
+            <div
+              className="card"
+              onClick={() => {
+                navigate(`encomendas/${kawai}`);
+                window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+              }}
+            >
+              <img src={kawaiImg} alt="Desenho no estilo DM Style" />
+              <ButtonStyle background="#fadbcf" text="Kawai"></ButtonStyle>
             </div>
           </div>
         </section>

@@ -7,12 +7,21 @@ import plusIcon from "../../assets/icons/plus.png";
 import minusIcon from "../../assets/icons/minus-sign.png";
 
 import json from "../../utils/businessRule.json";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  BsCash,
+  BsFillCreditCardFill,
+  BsFillFileEarmarkTextFill,
+  BsPaypal,
+} from "react-icons/bs";
+import ButtonStyle from "../../components/Button";
 
-const Product = (props: any) => {
+const Product = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
   };
+
+  const navigate = useNavigate();
 
   const { id } = useParams();
 
@@ -20,6 +29,8 @@ const Product = (props: any) => {
   const [amountPet, setAmountPet] = useState(0);
 
   const [product, setProduct] = useState({} as any);
+  const [productMayLikeOne, setProductMayLikeOne] = useState({} as any);
+  const [productMayLikeTwo, setProductMayLikeTwo] = useState({} as any);
 
   const products = json.businessRule;
 
@@ -37,21 +48,32 @@ const Product = (props: any) => {
     } else {
       setTotalAmount(radioValueInt * amountPeople);
     }
-
-    // eslint-disable-next-line
-  }, [radioValue, radioValueInt, amountPet, amountPeople]);
+  }, [
+    radioValue,
+    radioValueInt,
+    amountPet,
+    amountPeople,
+    petPrice,
+    product.petPrice,
+  ]);
 
   useEffect(() => {
     document.title = "Encomenda";
 
     if (id === "1") {
       setProduct(products[0]);
+      setProductMayLikeOne(products[1]);
+      setProductMayLikeTwo(products[2]);
     }
     if (id === "2") {
-      setProduct(products[2]);
+      setProduct(products[1]);
+      setProductMayLikeOne(products[0]);
+      setProductMayLikeTwo(products[2]);
     }
     if (id === "3") {
-      setProduct(products[1]);
+      setProduct(products[2]);
+      setProductMayLikeOne(products[0]);
+      setProductMayLikeTwo(products[1]);
     }
   }, [id, products]);
 
@@ -59,10 +81,12 @@ const Product = (props: any) => {
     <Container>
       <Nav />
       <section id="Form">
-        <div className="title">{product?.name}</div>
+        <div className="title">
+          {product?.name}
+          <img src={product?.image} alt="desenhos" />
+        </div>
 
         <div className="containerForm">
-          <img src={product?.image} alt="desenhos" />
           <form onSubmit={handleSubmit}>
             <div className="formHeader">
               <div className="finalPrice">R${totalAmount}</div>
@@ -81,6 +105,7 @@ const Product = (props: any) => {
                     name="size"
                     id="busto"
                     value="Busto"
+                    required
                     onChange={(e) => {
                       setRadioValue(e.target.value);
                       setRadioValueInt(parseInt(product.price.busto));
@@ -94,6 +119,7 @@ const Product = (props: any) => {
                     type="radio"
                     name="size"
                     id="meioCorpo"
+                    required
                     value="Meio Corpo"
                     onChange={(e) => {
                       setRadioValue(e.target.value);
@@ -107,6 +133,7 @@ const Product = (props: any) => {
                   <input
                     type="radio"
                     name="size"
+                    required
                     id="corpoInteiro"
                     value="Corpo Inteiro"
                     onChange={(e) => {
@@ -121,7 +148,7 @@ const Product = (props: any) => {
 
             <div className="amount">
               <label className="sizeValue">
-                <span>Quantidade:</span>
+                <span>Quantidade:</span> Pessoa
               </label>
 
               <div className="btnContainer">
@@ -149,13 +176,13 @@ const Product = (props: any) => {
 
             <div className="amountPet">
               <div className="petInfo">
-                <p className="petText">Pets - R$ cada</p>
+                <p className="petText">Pets - R${product.petPrice} cada</p>
                 <p className="infoPrice">
                   * Crianças e bebês são o mesmo valor de adulto
                 </p>
               </div>
               <label className="sizeValue">
-                <span>Quantidade:</span>
+                <span>Quantidade:</span> Pet
               </label>
               <div className="btnContainer">
                 <button
@@ -177,7 +204,85 @@ const Product = (props: any) => {
                 </button>
               </div>
             </div>
+
+            <div className="btnSubmit">
+              <button type="submit">Enviar Encomenda</button>
+            </div>
           </form>
+
+          <div className="deadline">
+            <h3>Prazo de entrega</h3>
+            <p>O prazo de entrega é de 10 a 15 dias.</p>
+            <p>Ao finalizar a ilustração é enviada por driver em PNG e PDF.</p>
+          </div>
+
+          <div className="paymentMethod">
+            <h3>Formas de pagamento</h3>
+            <p>
+              É cobrado no mínimo 50% do valor total da ilustração antes de
+              começa-la
+            </p>
+            <div className="iconsPayment">
+              <div className="icons">
+                <BsFillCreditCardFill />
+                <p>Cartão de Credito</p>
+              </div>
+
+              <div className="icons">
+                <BsFillFileEarmarkTextFill />
+
+                <p>Boleto</p>
+              </div>
+
+              <div className="icons">
+                <BsCash />
+
+                <p>Pix</p>
+              </div>
+
+              <div className="icons">
+                <BsPaypal />
+                <p>(Internacional)</p>
+              </div>
+            </div>
+          </div>
+          <div className="mayLike">
+            <div
+              className="card"
+              onClick={() => {
+                navigate(`/encomendas/${productMayLikeOne.id}`);
+                window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+              }}
+            >
+              <img
+                src={productMayLikeOne.image}
+                alt="Desenho no estilo Realista"
+              />
+              <ButtonStyle
+                background="#e15b50"
+                color="#fff"
+                text={productMayLikeOne.name}
+              ></ButtonStyle>
+            </div>
+
+            <div
+              className="card"
+              onClick={() => {
+                navigate(`/encomendas/${productMayLikeTwo.id}`);
+                window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+              }}
+            >
+              <img
+                src={productMayLikeTwo.image}
+                alt="Desenho no estilo DM Style"
+              />
+              <ButtonStyle
+                background="#e15b50"
+                color="#fff"
+                text={productMayLikeTwo.name}
+              ></ButtonStyle>
+            </div>
+          </div>
         </div>
       </section>
       <Footer />

@@ -3,6 +3,8 @@ import styles from "./style.module.scss";
 import { IoMenuOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 
+import logo from "../../assets/icons/dm-logo3.png";
+
 const Nav = () => {
   const navigate = useNavigate();
 
@@ -33,7 +35,7 @@ const Nav = () => {
           navigate("/");
         }}
       >
-        <h1>Logo</h1>
+        <img src={logo} alt="logo dm-desenhos" />
       </div>
       <IoMenuOutline onClick={toggleNav} className={styles.btnMobile} />
       <nav className={styles.navigation}>

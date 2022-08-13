@@ -3,6 +3,7 @@ import Nav from "../../components/Nav";
 
 import { Container } from "./styles";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 import bannerDesktop from "../../assets/images/home/home-debora.png";
 import bannerMobile from "../../assets/images/home/home-debora-mobile.png";
@@ -17,6 +18,10 @@ import ButtonStyle from "../../components/Button";
 
 const Home = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = "DM Desenhos";
+  }, []);
 
   const dmStyle = 1;
   const realistic = 2;

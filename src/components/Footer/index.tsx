@@ -2,11 +2,15 @@ import style from "./style.module.scss";
 
 import { BsFacebook, BsInstagram, BsWhatsapp, BsYoutube } from "react-icons/bs";
 
+import logo from "../../assets/icons/dm-logo.png";
+
 const Footer = () => {
   return (
     <footer id="footer" className={style.footer}>
       <div className={style.infoFooter}>
-        <div className={style.logo}>Logo</div>
+        <div className={style.logo}>
+          <img src={logo} alt="logo dm-desenhos" />
+        </div>
 
         <div className={style.socialContact}>
           {/* eslint-disable-next-line */}

@@ -30,10 +30,23 @@ export const Container = styled.main`
       @media (min-width: 900px) {
         margin: 0;
         gap: 1rem;
+        width: 50%;
       }
 
       img {
         width: 100%;
+
+        @media (min-width: 900px) {
+          width: auto;
+        }
+      }
+
+      .imageDesktop {
+        display: none;
+
+        @media (min-width: 900px) {
+          display: block;
+        }
       }
     }
     .containerForm {
@@ -42,6 +55,7 @@ export const Container = styled.main`
 
       @media (min-width: 900px) {
         margin-top: 2.75rem;
+        width: 50%;
       }
 
       form {
@@ -251,18 +265,21 @@ export const Container = styled.main`
       display: flex;
       justify-content: space-around;
 
-      .card {
+      a {
         width: 40%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-
-        img {
+        .card {
           width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 1rem;
 
-          border-radius: 10px;
-          box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.17);
+          img {
+            width: 100%;
+
+            border-radius: 10px;
+            box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.17);
+          }
         }
       }
     }

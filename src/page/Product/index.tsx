@@ -7,7 +7,7 @@ import plusIcon from "../../assets/icons/plus.png";
 import minusIcon from "../../assets/icons/minus-sign.png";
 
 import json from "../../utils/businessRule.json";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   BsCash,
   BsFillCreditCardFill,
@@ -20,8 +20,6 @@ const Product = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
   };
-
-  const navigate = useNavigate();
 
   const { id } = useParams();
 
@@ -41,25 +39,13 @@ const Product = () => {
 
   const [totalAmount, setTotalAmount] = useState(0);
 
-  useEffect(() => {
-    if (amountPet >= 1) {
-      setPetPrice(product.petPrice);
-      setTotalAmount(radioValueInt * amountPeople + petPrice * amountPet);
-    } else {
-      setTotalAmount(radioValueInt * amountPeople);
-    }
-  }, [
-    radioValue,
-    radioValueInt,
-    amountPet,
-    amountPeople,
-    petPrice,
-    product.petPrice,
-  ]);
+  const [submitOrderText, setSubmitOrderText] = useState("");
 
   useEffect(() => {
     document.title = "Encomenda";
+  }, []);
 
+  useEffect(() => {
     if (id === "1") {
       setProduct(products[0]);
       setProductMayLikeOne(products[1]);
@@ -77,6 +63,34 @@ const Product = () => {
     }
   }, [id, products]);
 
+  useEffect(() => {
+    if (amountPet >= 1) {
+      setPetPrice(product.petPrice);
+      setTotalAmount(radioValueInt * amountPeople + petPrice * amountPet);
+    } else {
+      setTotalAmount(radioValueInt * amountPeople);
+    }
+
+    if (amountPet === 0) {
+      setSubmitOrderText(
+        `Olá, Gostaria de solicitar um Desenho Tamanho ${radioValue} com ${amountPeople} Pessoa(s) no estilo ${product.name}, totalizando o valor de R$${totalAmount}`
+      );
+    } else {
+      setSubmitOrderText(
+        `Olá, Gostaria de solicitar um Desenho Tamanho ${radioValue} com ${amountPeople} Pessoa(s) e ${amountPet} Pet no estilo ${product.name}, totalizando o valor de R$${totalAmount}`
+      );
+    }
+  }, [
+    radioValue,
+    radioValueInt,
+    amountPet,
+    amountPeople,
+    petPrice,
+    product.petPrice,
+    product.name,
+    totalAmount,
+  ]);
+
   return (
     <Container>
       <Nav />
@@ -84,6 +98,7 @@ const Product = () => {
         <div className="title">
           {product?.name}
           <img src={product?.image} alt="desenhos" />
+          <img className="imageDesktop" src={product?.image} alt="desenhos" />
         </div>
 
         <div className="containerForm">
@@ -206,7 +221,15 @@ const Product = () => {
             </div>
 
             <div className="btnSubmit">
-              <button type="submit">Enviar Encomenda</button>
+              <button type="submit">
+                <a
+                  href={`https://api.whatsapp.com/send?phone=5585989493607&text=${submitOrderText}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Enviar Encomenda
+                </a>
+              </button>
             </div>
           </form>
 
@@ -247,41 +270,43 @@ const Product = () => {
             </div>
           </div>
           <div className="mayLike">
-            <div
-              className="card"
-              onClick={() => {
-                navigate(`/encomendas/${productMayLikeOne.id}`);
-                window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-              }}
-            >
-              <img
-                src={productMayLikeOne.image}
-                alt="Desenho no estilo Realista"
-              />
-              <ButtonStyle
-                background="#e15b50"
-                color="#fff"
-                text={productMayLikeOne.name}
-              ></ButtonStyle>
-            </div>
+            <a href={`/encomendas/${productMayLikeOne.id}`}>
+              <div
+                className="card"
+                onClick={() => {
+                  window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+                }}
+              >
+                <img
+                  src={productMayLikeOne.image}
+                  alt="Desenho no estilo Realista"
+                />
+                <ButtonStyle
+                  background="#e15b50"
+                  color="#fff"
+                  text={productMayLikeOne.name}
+                ></ButtonStyle>
+              </div>
+            </a>
 
-            <div
-              className="card"
-              onClick={() => {
-                navigate(`/encomendas/${productMayLikeTwo.id}`);
-                window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-              }}
-            >
-              <img
-                src={productMayLikeTwo.image}
-                alt="Desenho no estilo DM Style"
-              />
-              <ButtonStyle
-                background="#e15b50"
-                color="#fff"
-                text={productMayLikeTwo.name}
-              ></ButtonStyle>
-            </div>
+            <a href={`/encomendas/${productMayLikeTwo.id}`}>
+              <div
+                className="card"
+                onClick={() => {
+                  window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+                }}
+              >
+                <img
+                  src={productMayLikeTwo.image}
+                  alt="Desenho no estilo DM Style"
+                />
+                <ButtonStyle
+                  background="#e15b50"
+                  color="#fff"
+                  text={productMayLikeTwo.name}
+                ></ButtonStyle>
+              </div>
+            </a>
           </div>
         </div>
       </section>
